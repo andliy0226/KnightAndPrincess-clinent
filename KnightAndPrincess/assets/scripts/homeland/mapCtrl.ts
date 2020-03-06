@@ -1,21 +1,11 @@
-// Learn TypeScript:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/typescript.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/typescript.html
-// Learn Attribute:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] https://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/manual/en/scripting/life-cycle-callbacks.html
-
 const {ccclass, property} = cc._decorator;
 
 @ccclass
 export default class mapCtrl extends cc.Component {
-    speed:number=1.0
+    speed=1.0
 
     @property(cc.Camera)
-    cameNode:cc.Camera=null
+    cameNode=null
 
     onLoad () {
         this.node.on(cc.Node.EventType.TOUCH_START,this.onTouchStart,this)
@@ -27,10 +17,12 @@ export default class mapCtrl extends cc.Component {
         this.node.targetOff(this)
     }
 
-    onTouchStart(e:cc.Event.EventTouch){
+    onTouchStart(e){
+        // this.node._touchListener.setSwallowTouches(false)
+        return true
     
     }
-    onTouchMove(e:cc.Event.EventTouch){
+    onTouchMove(e){
        const {x:lx,y:ly} = e.getDelta()
        const x=this.cameNode.node.x-lx * this.speed
        const y=this.cameNode.node.y-ly * this.speed
@@ -48,8 +40,8 @@ export default class mapCtrl extends cc.Component {
         
     }
 
-    onTouchEnd(e:any){
-        cc.log("end")
+    onTouchEnd(e){
+        
      }
     start () {
         
